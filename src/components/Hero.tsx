@@ -1,131 +1,256 @@
-import { motion } from "framer-motion";
-import { ArrowDown, Mail, Phone, Linkedin, MapPin } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowDown, Mail, Phone, Linkedin, MapPin, Download, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profileImage from "@/assets/profile.jpg";
+import { useRef } from "react";
 
 const Hero = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
+    }
+  } as const;
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  } as const;
+
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
-      {/* Background grid pattern */}
+    <section 
+      ref={containerRef}
+      className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden"
+    >
+      {/* Animated background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
       
-      {/* Gradient orbs */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse" />
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 rounded-full bg-primary/30"
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.3, 0.8, 0.3],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 3 + i * 0.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.3,
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Enhanced gradient orbs with parallax */}
+      <motion.div 
+        style={{ y }}
+        className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
+      />
+      <motion.div 
+        style={{ y }}
+        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
+      />
+      <motion.div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
 
-      <div className="container relative z-10 px-6">
+      <motion.div 
+        style={{ opacity }}
+        className="container relative z-10 px-6"
+      >
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           {/* Left side - Text content */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
             className="text-left order-2 lg:order-1"
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-muted-foreground mb-8"
+              variants={itemVariants}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-muted-foreground mb-8 gradient-border"
             >
               <MapPin className="w-4 h-4 text-primary" />
-              Bangalore, Karnataka
+              <span>Bangalore, Karnataka</span>
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-glow-pulse" />
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="mb-2">
+              <span className="text-sm font-mono text-primary tracking-wider uppercase">
+                Welcome to my portfolio
+              </span>
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+              variants={itemVariants}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
             >
               Hi, I'm{" "}
-              <span className="text-gradient">Om Mulge</span>
+              <span className="text-shimmer">Om Mulge</span>
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl md:text-2xl text-muted-foreground mb-4 font-light"
+            <motion.div 
+              variants={itemVariants}
+              className="flex items-center gap-3 mb-4"
             >
-              AI & Machine Learning Engineer
-            </motion.p>
+              <Sparkles className="w-5 h-5 text-accent" />
+              <p className="text-xl md:text-2xl text-muted-foreground font-light">
+                AI & Machine Learning Engineer
+              </p>
+            </motion.div>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-base md:text-lg text-muted-foreground/80 mb-10 leading-relaxed"
+              variants={itemVariants}
+              className="text-base md:text-lg text-muted-foreground/80 mb-10 leading-relaxed max-w-xl"
             >
               Final-year B.E student passionate about building intelligent systems, 
               exploring real-world AI applications, and creating innovative solutions with NLP and Computer Vision.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex flex-wrap gap-4 mb-8"
+              variants={itemVariants}
+              className="flex flex-wrap gap-4 mb-10"
             >
-              <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90 text-primary-foreground font-semibold px-8">
-                <a href="#projects">View Projects</a>
+              <Button 
+                asChild 
+                size="lg" 
+                className="bg-gradient-primary hover:opacity-90 text-primary-foreground font-semibold px-8 shadow-glow hover:shadow-[0_0_60px_hsl(186_100%_50%_/_0.25)] transition-all duration-300"
+              >
+                <a href="#projects">
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  View Projects
+                </a>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10 hover:border-primary">
-                <a href="#contact">Get in Touch</a>
+              <Button 
+                asChild 
+                variant="outline" 
+                size="lg" 
+                className="border-primary/30 hover:bg-primary/10 hover:border-primary group"
+              >
+                <a href="#contact">
+                  Get in Touch
+                  <motion.span
+                    className="ml-2"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    →
+                  </motion.span>
+                </a>
               </Button>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="flex gap-6"
+              variants={itemVariants}
+              className="flex gap-4"
             >
-              <a
-                href="mailto:ommulge@gmail.com"
-                className="p-3 rounded-full glass hover:bg-primary/20 transition-colors group"
-              >
-                <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-              </a>
-              <a
-                href="tel:+918105928223"
-                className="p-3 rounded-full glass hover:bg-primary/20 transition-colors group"
-              >
-                <Phone className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-              </a>
-              <a
-                href="https://linkedin.com/in/om-mulge-187161267"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full glass hover:bg-primary/20 transition-colors group"
-              >
-                <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-              </a>
+              {[
+                { href: "mailto:ommulge@gmail.com", icon: Mail, label: "Email" },
+                { href: "tel:+918105928223", icon: Phone, label: "Phone" },
+                { href: "https://linkedin.com/in/om-mulge-187161267", icon: Linkedin, label: "LinkedIn", external: true },
+              ].map((item, index) => (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                  className="p-3 rounded-full glass hover:bg-primary/20 transition-all duration-300 group hover-lift"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <item.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                </motion.a>
+              ))}
             </motion.div>
           </motion.div>
 
           {/* Right side - Profile Image */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="flex justify-center lg:justify-end order-1 lg:order-2"
           >
             <div className="relative">
+              {/* Rotating gradient ring */}
+              <motion.div 
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: "conic-gradient(from 0deg, hsl(186 100% 50% / 0.3), hsl(270 95% 65% / 0.3), hsl(186 100% 50% / 0.3))",
+                  padding: "4px",
+                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                <div className="w-full h-full bg-background rounded-full" />
+              </motion.div>
+
               {/* Glow effect behind image */}
-              <div className="absolute inset-0 bg-gradient-primary rounded-full blur-2xl opacity-30 scale-110" />
+              <motion.div 
+                className="absolute inset-0 bg-gradient-primary rounded-full blur-2xl opacity-30 scale-110"
+                animate={{ opacity: [0.2, 0.4, 0.2] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
               
-              {/* Profile image */}
-              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl">
+              {/* Profile image with floating animation */}
+              <motion.div 
+                className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl shadow-primary/20"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              >
                 <img
                   src={profileImage}
-                  alt="Om Mulge"
+                  alt="Om Mulge - AI & Machine Learning Engineer"
                   className="w-full h-full object-cover object-top"
                 />
-              </div>
+                {/* Subtle overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
+              </motion.div>
               
-              {/* Decorative ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-primary/20 scale-110 animate-pulse" />
+              {/* Floating tech badges */}
+              <motion.div
+                className="absolute -right-4 top-1/4 px-3 py-1.5 rounded-full glass text-xs font-mono text-primary"
+                animate={{ y: [0, -5, 0], x: [0, 3, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              >
+                Python
+              </motion.div>
+              <motion.div
+                className="absolute -left-4 top-1/2 px-3 py-1.5 rounded-full glass text-xs font-mono text-accent"
+                animate={{ y: [0, 5, 0], x: [0, -3, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              >
+                AI/ML
+              </motion.div>
+              <motion.div
+                className="absolute -right-2 bottom-1/4 px-3 py-1.5 rounded-full glass text-xs font-mono text-primary"
+                animate={{ y: [0, -5, 0], x: [0, 3, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              >
+                NLP
+              </motion.div>
             </div>
           </motion.div>
         </div>
@@ -133,15 +258,20 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
+          transition={{ delay: 1.5, duration: 0.6 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <a href="#about" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-            <span className="text-sm">Scroll to explore</span>
-            <ArrowDown className="w-5 h-5 animate-bounce" />
-          </a>
+          <motion.a 
+            href="#about" 
+            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <span className="text-sm font-mono">Scroll to explore</span>
+            <ArrowDown className="w-5 h-5" />
+          </motion.a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
