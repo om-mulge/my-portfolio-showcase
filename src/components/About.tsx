@@ -3,7 +3,7 @@ import { GraduationCap, Award, BookOpen, Sparkles } from "lucide-react";
 
 const education = [
   { program: "B.E (AI & ML)", institute: "Bangalore Technological Institute", year: "2026", score: "8.71 CGPA" },
-  { program: "12th PUC", institute: "Sankalp Independent PU College", year: "2022", score: "75%" },
+  { program: "12th PUC", institute: "Sankalp Independent PU College", year: "2022", score: "73%" },
   { program: "10th SSLC", institute: "Shri Basaveshwar EM & HS", year: "2020", score: "88.96%" },
 ];
 
