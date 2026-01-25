@@ -39,41 +39,32 @@ const Hero = () => {
     }
   } as const;
   return <section ref={containerRef} className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
-      {/* Animated background grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
       
-      {/* Floating particles */}
+      {/* Minimal floating dots */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => <motion.div key={i} className="absolute w-2 h-2 rounded-full bg-primary/30" style={{
-        left: `${15 + i * 15}%`,
-        top: `${20 + i % 3 * 25}%`
+        {[...Array(4)].map((_, i) => <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-primary/40" style={{
+        left: `${20 + i * 20}%`,
+        top: `${25 + i % 2 * 30}%`
       }} animate={{
-        y: [0, -30, 0],
-        opacity: [0.3, 0.8, 0.3],
-        scale: [1, 1.2, 1]
+        y: [0, -20, 0],
+        opacity: [0.3, 0.6, 0.3]
       }} transition={{
-        duration: 3 + i * 0.5,
+        duration: 4 + i * 0.5,
         repeat: Infinity,
         ease: "easeInOut",
-        delay: i * 0.3
+        delay: i * 0.5
       }} />)}
       </div>
       
-      {/* Enhanced gradient orbs with parallax */}
+      {/* Single subtle gradient orb */}
       <motion.div style={{
       y
-    }} className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
+    }} className="absolute top-1/3 -left-48 w-[500px] h-[500px] bg-primary/8 rounded-full blur-3xl" />
       <motion.div style={{
       y
-    }} className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
-      <motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" animate={{
-      scale: [1, 1.1, 1],
-      opacity: [0.3, 0.5, 0.3]
-    }} transition={{
-      duration: 8,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }} />
+    }} className="absolute bottom-1/3 -right-48 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
 
       <motion.div style={{
       opacity
@@ -171,12 +162,12 @@ const Hero = () => {
             <div className="relative">
               {/* Rotating gradient ring */}
               <motion.div className="absolute inset-0 rounded-full" style={{
-              background: "conic-gradient(from 0deg, hsl(186 100% 50% / 0.3), hsl(270 95% 65% / 0.3), hsl(186 100% 50% / 0.3))",
-              padding: "4px"
+              background: "conic-gradient(from 0deg, hsl(160 84% 45% / 0.4), hsl(160 84% 60% / 0.1), hsl(160 84% 45% / 0.4))",
+              padding: "3px"
             }} animate={{
               rotate: 360
             }} transition={{
-              duration: 20,
+              duration: 25,
               repeat: Infinity,
               ease: "linear"
             }}>
