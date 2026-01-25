@@ -6,15 +6,15 @@ const projects = [
   {
     title: "ChatXpert - AI Smart Assistant",
     description:
-      "An AI-based smart assistant for iterative dialogues featuring NLP capabilities including lemmatization, tokenization, and sentiment analysis. Built with a hybrid architecture combining rule-based and ML approaches.",
+      "Developed an NLP-powered smart assistant to support team collaboration and project management. Implemented a shared workspace enabling multiple team members to work in parallel from different locations on a single project.",
     status: "In Progress",
     date: "March 2025 - Present",
     icon: MessageSquare,
     tech: ["Python", "NLTK", "spaCy", "DialogFlow", "RASA"],
     highlights: [
+      "Integrated notes section for real-time documentation and idea tracking",
+      "Seamlessly integrated chat, workspace, and notes modules into a unified platform",
       "Published research paper in IJCRT Journal, 2025",
-      "Hybrid architecture for flexible interaction",
-      "BLEU score & cosine similarity evaluation",
     ],
     gradient: "from-primary to-accent",
     accentColor: "primary",
