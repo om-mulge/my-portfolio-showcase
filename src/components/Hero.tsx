@@ -1,8 +1,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Mail, Phone, Linkedin, MapPin, Download, Sparkles } from "lucide-react";
+import { ArrowDown, Mail, Phone, Linkedin, MapPin, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profileImage from "@/assets/profile.jpg";
 import { useRef } from "react";
+import WaveText from "./WaveText";
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const {
@@ -85,8 +86,8 @@ const Hero = () => {
             </motion.div>
 
             <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Hi, I'm{" "}
-              <span className="text-shimmer">Om Mulge</span>
+              <WaveText text="Hi, I'm " />
+              <WaveText text="Om Mulge" className="text-shimmer" />
             </motion.h1>
 
             <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
