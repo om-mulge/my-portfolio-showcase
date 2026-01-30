@@ -7,7 +7,7 @@ const projects = [
     title: "ChatXpert - AI Smart Assistant",
     description:
       "Developed an NLP-powered smart assistant to support team collaboration and project management. Implemented a shared workspace enabling multiple team members to work in parallel from different locations on a single project.",
-    status: "In Progress",
+    status: "Completed",
     date: "March 2025 - Present",
     icon: MessageSquare,
     tech: ["Python", "NLTK", "spaCy", "DialogFlow", "RASA"],
