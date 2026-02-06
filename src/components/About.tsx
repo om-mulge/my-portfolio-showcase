@@ -1,5 +1,15 @@
 import { motion } from "framer-motion";
-import { GraduationCap, Award, BookOpen, Sparkles } from "lucide-react";
+import { GraduationCap, Award, BookOpen, Sparkles, Briefcase, MapPin } from "lucide-react";
+
+const experience = [
+  { 
+    role: "Currently Working", 
+    company: "POSSPOLE", 
+    location: "Bangalore", 
+    period: "Present",
+    description: "Contributing to innovative projects and gaining hands-on industry experience."
+  },
+];
 
 const education = [
   { program: "B.E (AI & ML)", institute: "Bangalore Technological Institute", year: "2026", score: "8.71 CGPA" },
@@ -58,6 +68,43 @@ const About = () => {
             A passionate AI enthusiast with a strong foundation in machine learning, 
             natural language processing, and computer vision.
           </p>
+        </motion.div>
+
+        {/* Work Experience */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-5xl mx-auto mb-8"
+        >
+          <div className="bg-gradient-card rounded-2xl p-8 shadow-card hover-lift">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 rounded-xl bg-primary/10 relative">
+                <Briefcase className="w-6 h-6 text-primary" />
+                <div className="absolute inset-0 bg-primary/20 rounded-xl blur-md -z-10" />
+              </div>
+              <h3 className="text-xl font-semibold">Work Experience</h3>
+            </div>
+            {experience.map((exp) => (
+              <div key={exp.company} className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-all duration-300">
+                <div className="flex-1">
+                  <h4 className="font-medium text-foreground text-lg">{exp.role}</h4>
+                  <p className="text-primary font-semibold">{exp.company}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{exp.description}</p>
+                </div>
+                <div className="flex items-center gap-4 text-sm">
+                  <span className="inline-flex items-center gap-1 text-muted-foreground">
+                    <MapPin className="w-4 h-4" />
+                    {exp.location}
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs">
+                    {exp.period}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
