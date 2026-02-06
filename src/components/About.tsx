@@ -8,7 +8,7 @@ const experience = [
     location: "Bangalore", 
     period: "Present",
     description: "Contributing to innovative projects and gaining hands-on industry experience.",
-    mapUrl: "https://www.google.com/maps/place/Bengaluru,+Karnataka,+India"
+    mapUrl: "https://maps.app.goo.gl/gz9BAgyhpYy4ngB7A"
   },
 ];
 
