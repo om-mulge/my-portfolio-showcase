@@ -91,22 +91,19 @@ const About = () => {
               <div key={exp.company} className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-all duration-300">
                 <div className="flex-1">
                   <h4 className="font-medium text-foreground text-lg">{exp.role}</h4>
-                  <a 
-                    href={exp.mapUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-primary font-semibold hover:underline cursor-pointer inline-flex items-center gap-1 group/link"
-                  >
-                    {exp.company}
-                    <MapPin className="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity" />
-                  </a>
+                  <p className="text-primary font-semibold">{exp.company}</p>
                   <p className="text-sm text-muted-foreground mt-1">{exp.description}</p>
                 </div>
                 <div className="flex items-center gap-4 text-sm">
-                  <span className="inline-flex items-center gap-1 text-muted-foreground">
+                  <a 
+                    href={exp.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                  >
                     <MapPin className="w-4 h-4" />
-                    {exp.location}
-                  </span>
+                    <span className="hover:underline">{exp.location}</span>
+                  </a>
                   <span className="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs">
                     {exp.period}
                   </span>
