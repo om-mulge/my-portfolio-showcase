@@ -4,11 +4,11 @@ import { GraduationCap, Award, BookOpen, Sparkles, Briefcase, MapPin } from "luc
 const experience = [
   { 
     role: "Currently Working", 
-    company: "POSSPOLE", 
+    company: "POSSPOLE Pvt Ltd", 
     location: "Bangalore", 
     period: "Present",
     description: "Contributing to innovative projects and gaining hands-on industry experience.",
-    mapUrl: "https://www.google.com/maps/search/POSSPOLE+Bangalore"
+    mapUrl: "https://maps.app.goo.gl/Xj2aas2U1TmUnfRj8"
   },
 ];
 
