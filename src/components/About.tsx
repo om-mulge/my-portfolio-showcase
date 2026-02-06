@@ -7,7 +7,8 @@ const experience = [
     company: "POSSPOLE", 
     location: "Bangalore", 
     period: "Present",
-    description: "Contributing to innovative projects and gaining hands-on industry experience."
+    description: "Contributing to innovative projects and gaining hands-on industry experience.",
+    mapUrl: "https://www.google.com/maps/search/POSSPOLE+Bangalore"
   },
 ];
 
@@ -90,7 +91,15 @@ const About = () => {
               <div key={exp.company} className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-all duration-300">
                 <div className="flex-1">
                   <h4 className="font-medium text-foreground text-lg">{exp.role}</h4>
-                  <p className="text-primary font-semibold">{exp.company}</p>
+                  <a 
+                    href={exp.mapUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary font-semibold hover:underline cursor-pointer inline-flex items-center gap-1 group/link"
+                  >
+                    {exp.company}
+                    <MapPin className="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity" />
+                  </a>
                   <p className="text-sm text-muted-foreground mt-1">{exp.description}</p>
                 </div>
                 <div className="flex items-center gap-4 text-sm">
