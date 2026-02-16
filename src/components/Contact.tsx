@@ -29,7 +29,10 @@ const contactInfo = [
     icon: MapPin,
     label: "Location",
     value: "Bangalore, Karnataka",
+    href: "https://www.google.com/maps/place/Bangalore,+Karnataka/@12.9715987,77.5945627,12z/data=!3m1!4b1!4m5!3m4!1s0x3bae1670c8a9e6d:0x919d9f2b8b1e5c!8m2!3d12.9715987!4d77.5945627",
+    external: true,
     color: "accent",
+
   },
 ];
 
