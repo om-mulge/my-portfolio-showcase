@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, Linkedin, MapPin, Send, Sparkles, ArrowRight } from "lucide-react";
+import { Mail, Phone, Linkedin, MapPin, Send, Sparkles, ArrowRight, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const contactInfo = [
@@ -7,7 +7,8 @@ const contactInfo = [
     icon: Mail,
     label: "Email",
     value: "ommulge@gmail.com",
-    href: "mailto:ommulge@gmail.com",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=ommulge@gmail.com",
+
     color: "primary",
   },
   {
@@ -30,6 +31,15 @@ const contactInfo = [
     label: "Location",
     value: "Bangalore, Karnataka",
     href: "https://www.google.com/maps/place/Bangalore,+Karnataka/@12.9715987,77.5945627,12z/data=!3m1!4b1!4m5!3m4!1s0x3bae1670c8a9e6d:0x919d9f2b8b1e5c!8m2!3d12.9715987!4d77.5945627",
+    external: true,
+    color: "accent",
+
+  },
+   {
+    icon: Github,
+    label: "GitHub",
+    value: "om-mulge",
+    href: "https://github.com/om-mulge",
     external: true,
     color: "accent",
 
@@ -171,7 +181,7 @@ const Contact = () => {
                   size="lg" 
                   className="bg-gradient-primary hover:opacity-90 text-primary-foreground font-semibold px-8 shadow-glow hover:shadow-[0_0_60px_hsl(186_100%_50%_/_0.3)] transition-all duration-300 relative z-10"
                 >
-                  <a href="mailto:ommulge@gmail.com">
+                  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ommulge@gmail.com">
                     <Mail className="w-4 h-4 mr-2" />
                     Send Email
                     <motion.span

@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Mail, Phone, Linkedin, MapPin, Sparkles } from "lucide-react";
+import { ArrowDown, Mail, Phone, Linkedin, MapPin, Sparkles, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profileImage from "@/assets/profile.jpg";
 import { useRef } from "react";
@@ -126,14 +126,22 @@ const Hero = () => {
 
             <motion.div variants={itemVariants} className="flex gap-4">
               {[{
-              href: "mailto:ommulge@gmail.com",
+             href: "https://mail.google.com/mail/?view=cm&fs=1&to=ommulge@gmail.com",
+
               icon: Mail,
               label: "Email"
             }, {
               href: "tel:+918105928223",
               icon: Phone,
               label: "Phone"
-            }, {
+            },
+            {
+              href: "https://github.com/om-mulge",
+              icon: Github,
+              label: "GitHub",
+              external: true
+            },
+            {
               href: "https://linkedin.com/in/om-mulge-187161267",
               icon: Linkedin,
               label: "LinkedIn",
