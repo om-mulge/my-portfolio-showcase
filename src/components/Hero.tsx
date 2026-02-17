@@ -2,9 +2,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, Mail, Phone, Linkedin, MapPin, Sparkles, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profileImage from "@/assets/profile.jpg";
-import { useRef, Suspense } from "react";
+import { useRef } from "react";
 import WaveText from "./WaveText";
-import FloatingModel from "./FloatingModel";
 import RippleEffect from "./RippleButton";
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -174,14 +173,7 @@ const Hero = () => {
           delay: 0.3,
           ease: "easeOut"
         }} className="flex flex-col items-center gap-6 order-1 lg:order-2">
-            {/* 3D Model */}
-            <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
-              <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">Loading 3D...</div>}>
-                <FloatingModel />
-              </Suspense>
-            </div>
-
-            {/* Profile image below */}
+            {/* Profile image */}
             <div className="relative">
               <motion.div className="absolute inset-0 rounded-full" style={{
               background: "conic-gradient(from 0deg, hsl(160 84% 45% / 0.4), hsl(160 84% 60% / 0.1), hsl(160 84% 45% / 0.4))",
