@@ -87,7 +87,7 @@ const Hero = () => {
 
             <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               <WaveText text="Hi, I'm " />
-              <WaveText text="Om Mulge" letterClassName="text-shimmer" />
+              <WaveText text="Disha sarkar" letterClassName="text-shimmer" />
             </motion.h1>
 
             <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
