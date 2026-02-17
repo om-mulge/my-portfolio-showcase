@@ -2,8 +2,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, Mail, Phone, Linkedin, MapPin, Sparkles, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profileImage from "@/assets/profile.jpg";
-import { useRef } from "react";
+import { useRef, Suspense } from "react";
 import WaveText from "./WaveText";
+import FloatingModel from "./FloatingModel";
+import RippleEffect from "./RippleButton";
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const {
@@ -103,25 +105,29 @@ const Hero = () => {
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mb-10">
-              <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90 text-primary-foreground font-semibold px-8 shadow-glow hover:shadow-[0_0_60px_hsl(186_100%_50%_/_0.25)] transition-all duration-300">
-                <a href="#projects">
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  View Projects
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10 hover:border-primary group">
-                <a href="#contact">
-                  Get in Touch
-                  <motion.span className="ml-2" animate={{
-                  x: [0, 4, 0]
-                }} transition={{
-                  duration: 1.5,
-                  repeat: Infinity
-                }}>
-                    →
-                  </motion.span>
-                </a>
-              </Button>
+              <RippleEffect className="rounded-md">
+                <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90 text-primary-foreground font-semibold px-8 shadow-glow hover:shadow-[0_0_60px_hsl(160_84%_45%_/_0.25)] transition-all duration-300">
+                  <a href="#projects">
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    View Projects
+                  </a>
+                </Button>
+              </RippleEffect>
+              <RippleEffect className="rounded-md">
+                <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10 hover:border-primary group">
+                  <a href="#contact">
+                    Get in Touch
+                    <motion.span className="ml-2" animate={{
+                      x: [0, 4, 0]
+                    }} transition={{
+                      duration: 1.5,
+                      repeat: Infinity
+                    }}>
+                      →
+                    </motion.span>
+                  </a>
+                </Button>
+              </RippleEffect>
             </motion.div>
 
             <motion.div variants={itemVariants} className="flex gap-4">
@@ -167,9 +173,16 @@ const Hero = () => {
           duration: 0.8,
           delay: 0.3,
           ease: "easeOut"
-        }} className="flex justify-center lg:justify-end order-1 lg:order-2">
+        }} className="flex flex-col items-center gap-6 order-1 lg:order-2">
+            {/* 3D Model */}
+            <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
+              <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">Loading 3D...</div>}>
+                <FloatingModel />
+              </Suspense>
+            </div>
+
+            {/* Profile image below */}
             <div className="relative">
-              {/* Rotating gradient ring */}
               <motion.div className="absolute inset-0 rounded-full" style={{
               background: "conic-gradient(from 0deg, hsl(160 84% 45% / 0.4), hsl(160 84% 60% / 0.1), hsl(160 84% 45% / 0.4))",
               padding: "3px"
@@ -183,7 +196,6 @@ const Hero = () => {
                 <div className="w-full h-full bg-background rounded-full" />
               </motion.div>
 
-              {/* Glow effect behind image */}
               <motion.div className="absolute inset-0 bg-gradient-primary rounded-full blur-2xl opacity-30 scale-110" animate={{
               opacity: [0.2, 0.4, 0.2]
             }} transition={{
@@ -192,23 +204,16 @@ const Hero = () => {
               ease: "easeInOut"
             }} />
               
-              {/* Profile image with floating animation */}
-              <motion.div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl shadow-primary/20" animate={{
-              y: [0, -10, 0]
+              <motion.div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-primary/30 shadow-2xl shadow-primary/20" animate={{
+              y: [0, -6, 0]
             }} transition={{
               duration: 6,
               repeat: Infinity,
               ease: "easeInOut"
             }}>
                 <img src={profileImage} alt="Om Mulge - AI & Machine Learning Engineer" className="w-full h-full object-cover object-top" />
-                {/* Subtle overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
               </motion.div>
-              
-              {/* Floating tech badges */}
-              
-              
-              
             </div>
           </motion.div>
         </div>
