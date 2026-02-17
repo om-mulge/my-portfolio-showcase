@@ -12,6 +12,7 @@ const experience = [
   },
 ];
 
+//hh
 const education = [
   { program: "B.E (AI & ML)", institute: "Bangalore Technological Institute", year: "2026", score: "8.71 CGPA" },
   { program: "12th PUC", institute: "Sankalp Independent PU College", year: "2022", score: "73%" },
