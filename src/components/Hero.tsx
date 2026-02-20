@@ -14,7 +14,7 @@ const Hero = () => {
     offset: ["start start", "end start"]
   });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const containerVariants = {
     hidden: {
       opacity: 0
