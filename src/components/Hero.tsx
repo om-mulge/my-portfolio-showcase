@@ -188,7 +188,8 @@ const Hero = () => {
                 <div className="w-full h-full bg-background rounded-full" />
               </motion.div>
 
-              <motion.div className="absolute inset-0 bg-gradient-primary rounded-full blur-2xl opacity-30 scale-110" animate={{
+              <motion.div className="absolute inset-0 bg-gradient-primary rounded-full blur-3xl opacity-40 scale-125"
+ animate={{
               opacity: [0.2, 0.4, 0.2]
             }} transition={{
               duration: 4,
@@ -196,7 +197,11 @@ const Hero = () => {
               ease: "easeInOut"
             }} />
               
-              <motion.div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-primary/30 shadow-2xl shadow-primary/20" animate={{
+              <motion.div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 
+rounded-full overflow-hidden 
+border-2 border-primary/30 
+shadow-2xl shadow-primary/20"
+ animate={{
               y: [0, -6, 0]
             }} transition={{
               duration: 6,
