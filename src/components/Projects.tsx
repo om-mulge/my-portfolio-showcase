@@ -51,7 +51,29 @@ const projects = [
     gradient: "from-primary to-accent",
     accentColor: "primary",
   },
+  
 ];
+const miniProjects = [
+  {
+    title: "QR-Code-Generator",
+    description: "Generates QR codes for any given input text or URL.",
+    tech: ["Python", "qrcode", "Pillow"],
+    github: "https://github.com/om-mulge/QR-Code-Generator",
+  },
+  {
+    title: "Text-to-Speech Converter",
+    description: "Converts text to speech using Python and TTS libraries.",
+    tech: ["Python", "pyttsx3", "SpeechRecognition"],
+    github: "https://github.com/om-mulge/Text-to-Speech",
+  },
+  {
+    title: "rock-paper-scissors",
+    description: "A simple rock-paper-scissors game implemented in Python.",
+    tech: ["Python", "random"],
+    github: "https://github.com/om-mulge/rock-paper-scissor",
+  },
+];
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -202,6 +224,65 @@ const Projects = () => {
             </motion.div>
           ))}
         </motion.div>
+        {/* Mini Projects Section */}
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  className="mt-20 max-w-5xl mx-auto"
+>
+  <h3 className="text-xl font-semibold mb-8 text-center text-muted-foreground">
+    Other Mini Projects
+  </h3>
+
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {miniProjects.map((project, index) => (
+      <motion.div
+        key={project.title}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.1 }}
+        whileHover={{ y: -6 }}
+        className="group bg-card/60 backdrop-blur-md border border-border 
+                   rounded-xl p-5 shadow-md hover:shadow-glow 
+                   transition-all duration-300"
+      >
+        <div className="flex items-center justify-between mb-3">
+          <h4 className="text-sm font-semibold group-hover:text-primary transition-colors">
+            {project.title}
+          </h4>
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+
+        <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-2">
+          {project.tech.map((tech) => (
+            <span
+              key={tech}
+              className="px-2 py-1 text-[10px] font-mono rounded 
+                         bg-muted text-muted-foreground"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
+
       </div>
     </section>
   );
