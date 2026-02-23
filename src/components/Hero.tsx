@@ -173,41 +173,120 @@ const Hero = () => {
           delay: 0.3,
           ease: "easeOut"
         }} className="flex flex-col items-center gap-6 order-1 lg:order-2">
-            {/* Profile image */}
+            {/* Profile image with revolving stars */}
             <div className="relative">
-              <motion.div className="absolute inset-0 rounded-full" style={{
-              background: "conic-gradient(from 0deg, hsl(160 84% 45% / 0.4), hsl(160 84% 60% / 0.1), hsl(160 84% 45% / 0.4))",
-              padding: "3px"
-            }} animate={{
-              rotate: 360
-            }} transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear"
-            }}>
+              {/* Revolving stars - orbit 1 */}
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={`star1-${i}`}
+                  className="absolute w-2 h-2 rounded-full z-20"
+                  style={{
+                    background: "hsl(160, 84%, 55%)",
+                    boxShadow: "0 0 8px hsl(160, 84%, 55%), 0 0 20px hsl(160, 84%, 45%)",
+                    top: "50%",
+                    left: "50%",
+                  }}
+                  animate={{
+                    x: [
+                      Math.cos((i / 8) * Math.PI * 2) * 140,
+                      Math.cos((i / 8) * Math.PI * 2 + Math.PI * 2) * 140,
+                    ],
+                    y: [
+                      Math.sin((i / 8) * Math.PI * 2) * 140,
+                      Math.sin((i / 8) * Math.PI * 2 + Math.PI * 2) * 140,
+                    ],
+                    scale: [0.8, 1.3, 0.8],
+                    opacity: [0.5, 1, 0.5],
+                  }}
+                  transition={{
+                    x: { duration: 8, repeat: Infinity, ease: "linear" },
+                    y: { duration: 8, repeat: Infinity, ease: "linear" },
+                    scale: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.25 },
+                    opacity: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.25 },
+                  }}
+                />
+              ))}
+
+              {/* Revolving stars - orbit 2 (reverse, larger) */}
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={`star2-${i}`}
+                  className="absolute w-1.5 h-1.5 rounded-full z-20"
+                  style={{
+                    background: "hsl(170, 70%, 50%)",
+                    boxShadow: "0 0 6px hsl(170, 70%, 50%), 0 0 15px hsl(170, 70%, 40%)",
+                    top: "50%",
+                    left: "50%",
+                  }}
+                  animate={{
+                    x: [
+                      Math.cos((i / 6) * Math.PI * 2) * 170,
+                      Math.cos((i / 6) * Math.PI * 2 - Math.PI * 2) * 170,
+                    ],
+                    y: [
+                      Math.sin((i / 6) * Math.PI * 2) * 170,
+                      Math.sin((i / 6) * Math.PI * 2 - Math.PI * 2) * 170,
+                    ],
+                    scale: [1, 1.5, 1],
+                    opacity: [0.4, 0.9, 0.4],
+                  }}
+                  transition={{
+                    x: { duration: 12, repeat: Infinity, ease: "linear" },
+                    y: { duration: 12, repeat: Infinity, ease: "linear" },
+                    scale: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 },
+                    opacity: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 },
+                  }}
+                />
+              ))}
+
+              {/* Tiny sparkle particles - orbit 3 */}
+              {[...Array(12)].map((_, i) => (
+                <motion.div
+                  key={`sparkle-${i}`}
+                  className="absolute w-1 h-1 rounded-full z-20"
+                  style={{
+                    background: "hsl(150, 80%, 60%)",
+                    boxShadow: "0 0 4px hsl(150, 80%, 60%)",
+                    top: "50%",
+                    left: "50%",
+                  }}
+                  animate={{
+                    x: [
+                      Math.cos((i / 12) * Math.PI * 2) * 120,
+                      Math.cos((i / 12) * Math.PI * 2 + Math.PI * 2) * 120,
+                    ],
+                    y: [
+                      Math.sin((i / 12) * Math.PI * 2) * 120,
+                      Math.sin((i / 12) * Math.PI * 2 + Math.PI * 2) * 120,
+                    ],
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    x: { duration: 6, repeat: Infinity, ease: "linear" },
+                    y: { duration: 6, repeat: Infinity, ease: "linear" },
+                    opacity: { duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 },
+                  }}
+                />
+              ))}
+
+              {/* Rotating conic gradient ring */}
+              <motion.div className="absolute inset-[-16px] rounded-full z-10" style={{
+                background: "conic-gradient(from 0deg, hsl(160 84% 45% / 0.5), hsl(170 70% 50% / 0.1), hsl(150 80% 45% / 0.3), transparent, hsl(160 84% 45% / 0.5))",
+                padding: "3px",
+              }} animate={{ rotate: 360 }} transition={{ duration: 15, repeat: Infinity, ease: "linear" }}>
                 <div className="w-full h-full bg-background rounded-full" />
               </motion.div>
 
+              {/* Pulsing glow behind image */}
               <motion.div className="absolute inset-0 bg-gradient-primary rounded-full blur-3xl opacity-40 scale-125"
- animate={{
-              opacity: [0.2, 0.4, 0.2]
-            }} transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }} />
+                animate={{ opacity: [0.2, 0.5, 0.2], scale: [1.2, 1.35, 1.2] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
               
-              <motion.div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 
-rounded-full overflow-hidden 
-border-2 border-primary/30 
-shadow-2xl shadow-primary/20"
- animate={{
-              y: [0, -6, 0]
-            }} transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}>
+              <motion.div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-primary/30 shadow-2xl shadow-primary/20 z-10"
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              >
                 <img src={profileImage} alt="Om Mulge - AI & Machine Learning Engineer" className="w-full h-full object-cover object-top" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
               </motion.div>
