@@ -232,9 +232,9 @@ const Projects = () => {
   transition={{ duration: 0.6 }}
   className="mt-20 max-w-5xl mx-auto"
 >
-  <h3 className="text-xl font-semibold mb-8 text-center text-muted-foreground">
-    Other Mini Projects
-  </h3>
+ <h3 className="text-3xl md:text-4xl font-bold mb-4">
+            Featured <span className="text-gradient">Projects</span>
+          </h3>
 
   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
     {miniProjects.map((project, index) => (
