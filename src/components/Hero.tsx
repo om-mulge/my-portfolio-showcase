@@ -2,9 +2,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, Mail, Phone, Linkedin, MapPin, Sparkles, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profileImage from "@/assets/profile.jpg";
-import { useRef } from "react";
+import { useRef, Suspense } from "react";
 import WaveText from "./WaveText";
 import RippleEffect from "./RippleButton";
+import ProfileOrb from "./ProfileOrb";
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const {
@@ -173,113 +174,15 @@ const Hero = () => {
           delay: 0.3,
           ease: "easeOut"
         }} className="flex flex-col items-center gap-6 order-1 lg:order-2">
-            {/* Profile image with revolving stars */}
             <div className="relative">
-              {/* Revolving stars - orbit 1 */}
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={`star1-${i}`}
-                  className="absolute w-2 h-2 rounded-full z-20"
-                  style={{
-                    background: "hsl(160, 84%, 55%)",
-                    boxShadow: "0 0 8px hsl(160, 84%, 55%), 0 0 20px hsl(160, 84%, 45%)",
-                    top: "50%",
-                    left: "50%",
-                  }}
-                  animate={{
-                    x: [
-                      Math.cos((i / 8) * Math.PI * 2) * 140,
-                      Math.cos((i / 8) * Math.PI * 2 + Math.PI * 2) * 140,
-                    ],
-                    y: [
-                      Math.sin((i / 8) * Math.PI * 2) * 140,
-                      Math.sin((i / 8) * Math.PI * 2 + Math.PI * 2) * 140,
-                    ],
-                    scale: [0.8, 1.3, 0.8],
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    x: { duration: 8, repeat: Infinity, ease: "linear" },
-                    y: { duration: 8, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.25 },
-                    opacity: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.25 },
-                  }}
-                />
-              ))}
-
-              {/* Revolving stars - orbit 2 (reverse, larger) */}
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={`star2-${i}`}
-                  className="absolute w-1.5 h-1.5 rounded-full z-20"
-                  style={{
-                    background: "hsl(170, 70%, 50%)",
-                    boxShadow: "0 0 6px hsl(170, 70%, 50%), 0 0 15px hsl(170, 70%, 40%)",
-                    top: "50%",
-                    left: "50%",
-                  }}
-                  animate={{
-                    x: [
-                      Math.cos((i / 6) * Math.PI * 2) * 170,
-                      Math.cos((i / 6) * Math.PI * 2 - Math.PI * 2) * 170,
-                    ],
-                    y: [
-                      Math.sin((i / 6) * Math.PI * 2) * 170,
-                      Math.sin((i / 6) * Math.PI * 2 - Math.PI * 2) * 170,
-                    ],
-                    scale: [1, 1.5, 1],
-                    opacity: [0.4, 0.9, 0.4],
-                  }}
-                  transition={{
-                    x: { duration: 12, repeat: Infinity, ease: "linear" },
-                    y: { duration: 12, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 },
-                    opacity: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 },
-                  }}
-                />
-              ))}
-
-              {/* Tiny sparkle particles - orbit 3 */}
-              {[...Array(12)].map((_, i) => (
-                <motion.div
-                  key={`sparkle-${i}`}
-                  className="absolute w-1 h-1 rounded-full z-20"
-                  style={{
-                    background: "hsl(150, 80%, 60%)",
-                    boxShadow: "0 0 4px hsl(150, 80%, 60%)",
-                    top: "50%",
-                    left: "50%",
-                  }}
-                  animate={{
-                    x: [
-                      Math.cos((i / 12) * Math.PI * 2) * 120,
-                      Math.cos((i / 12) * Math.PI * 2 + Math.PI * 2) * 120,
-                    ],
-                    y: [
-                      Math.sin((i / 12) * Math.PI * 2) * 120,
-                      Math.sin((i / 12) * Math.PI * 2 + Math.PI * 2) * 120,
-                    ],
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    x: { duration: 6, repeat: Infinity, ease: "linear" },
-                    y: { duration: 6, repeat: Infinity, ease: "linear" },
-                    opacity: { duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 },
-                  }}
-                />
-              ))}
-
-              {/* Rotating conic gradient ring */}
-              <motion.div className="absolute inset-[-16px] rounded-full z-10" style={{
-                background: "conic-gradient(from 0deg, hsl(160 84% 45% / 0.5), hsl(170 70% 50% / 0.1), hsl(150 80% 45% / 0.3), transparent, hsl(160 84% 45% / 0.5))",
-                padding: "3px",
-              }} animate={{ rotate: 360 }} transition={{ duration: 15, repeat: Infinity, ease: "linear" }}>
-                <div className="w-full h-full bg-background rounded-full" />
-              </motion.div>
+              {/* 3D Orb with stars */}
+              <Suspense fallback={null}>
+                <ProfileOrb />
+              </Suspense>
 
               {/* Pulsing glow behind image */}
               <motion.div className="absolute inset-0 bg-gradient-primary rounded-full blur-3xl opacity-40 scale-125"
-                animate={{ opacity: [0.2, 0.5, 0.2], scale: [1.2, 1.35, 1.2] }}
+                animate={{ opacity: [0.15, 0.4, 0.15] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
               
