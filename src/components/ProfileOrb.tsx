@@ -52,7 +52,7 @@ const OrbitingStar = ({ index, total, radius, speed }: { index: number; total: n
 
 const ProfileOrb = () => {
   return (
-    <div className="absolute inset-[-40px] md:inset-[-50px] lg:inset-[-60px] z-0 pointer-events-none">
+    <div className="w-full h-full">
       <Canvas
         camera={{ position: [0, 0, 4], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
