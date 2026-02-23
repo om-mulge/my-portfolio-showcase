@@ -174,11 +174,13 @@ const Hero = () => {
           delay: 0.3,
           ease: "easeOut"
         }} className="flex flex-col items-center gap-6 order-1 lg:order-2">
-            <div className="relative">
-              {/* 3D Orb with stars */}
-              <Suspense fallback={null}>
-                <ProfileOrb />
-              </Suspense>
+            <div className="relative flex items-center justify-center">
+              {/* 3D Orb with stars - centered on image */}
+              <div className="absolute w-[calc(100%+120px)] h-[calc(100%+120px)] md:w-[calc(100%+140px)] md:h-[calc(100%+140px)] lg:w-[calc(100%+160px)] lg:h-[calc(100%+160px)]">
+                <Suspense fallback={null}>
+                  <ProfileOrb />
+                </Suspense>
+              </div>
 
               {/* Pulsing glow behind image */}
               <motion.div className="absolute inset-0 bg-gradient-primary rounded-full blur-3xl opacity-40 scale-125"
